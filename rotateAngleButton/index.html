@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style/materialize.min.css">
+		<link rel="shortcut icon" href="">
+	</head>
+	<body>
+
+		<form>
+			<label for="rotateDegrees">rotateDegrees</label><br>
+			<input type="button" id="rotateDegrees" value="90 degrees rotate" class="waves-effect waves-light btn left col m6 offset-m3 blue">
+		</form>
+		<script src="http://webmo.local/javascripts/webmo.js"></script>
+		<script type="text/javascript">
+
+		function rotateDegrees(_degree){
+			var degree=_degree
+			var webmo = new Webmo.ws("webmo.local")
+			webmo.onopen = function () {
+				webmo.rotateBy(90,180)
+			}
+		}
+		document.addEventListener('DOMContentLoaded', function(event) {
+			webmo = new Webmo.ws(location.hostname)
+			document.getElementById("rotateDegrees").addEventListener("click",function(){
+				rotateDegrees(90)
+			})
+		})
+
+		</script>
+	</body>
+</html>

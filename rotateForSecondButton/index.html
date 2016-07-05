@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style/materialize.min.css">
+		<link rel="shortcut icon" href="">
+	</head>
+	<body>
+
+		<form>
+			<label for="rotateForSeconds">rotateForSeconds</label><br>
+			<input type="button" id="rotateForSeconds" value="2 seconds Rotate" class="waves-effect waves-light btn left col m6 offset-m3 blue">
+		</form>
+		<script src="http://webmo.local/javascripts/webmo.js"></script>
+		<script type="text/javascript">
+		function rotateForSeconds(_second){
+			milliSecond=_second*1000;
+			var webmo = new Webmo.ws("webmo.local")
+			webmo.onopen = function () {
+				webmo.rotate(360)
+				setTimeout(function () {
+					webmo.stop()
+				}, milliSecond)
+			}
+		}
+		document.addEventListener('DOMContentLoaded', function(event) {
+			webmo = new Webmo.ws(location.hostname)
+			document.getElementById("rotateForSeconds").addEventListener("click",function(){
+				rotateForSeconds(2)
+			})
+		})
+		</script>
+	</body>
+</html>
