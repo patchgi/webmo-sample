@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/materialize.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="shortcut icon" href="">
+
+</head>
+
+<body>
+	<label>sensorRotateDegrees</label>
+	<input id="rotate-degree">
+	<script>
+		document.addEventListener('DOMContentLoaded', function(event) {
+			webmo = new Webmo.ws(location.hostname)
+			webmo.onmessage = function(json) {
+				if (json.type === 'data') {
+					var d = document.getElementById('rotate-degree')
+					 d.value=(d.value * 0.8 + json.data.rotation / 4096.0 * 360 * 0.2).toFixed(1)
+					
+				}
+			}
+		})
+	</script>
+
+	<script src="http://webmo.local/javascripts/webmo.js"></script>
+</body>
+
+</html>

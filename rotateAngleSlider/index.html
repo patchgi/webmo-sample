@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/materialize.min.css">
+		<link rel="shortcut icon" href="">
+		<script>
+			function rotateSlider(e) {
+				var dps = document.querySelector('#rotateSpeedSlider').value // degree per sec
+				if (Math.abs(dps) < 5) {
+					dps = 0
+				}
+				webmo.rotate(dps)
+				e.target.parentElement.querySelector('p').innerHTML = dps
+				e.preventDefault()
+			}
+
+			function stop(e) {
+				console.log("stop")
+				webmo.stop()
+				e.target.parentElement.querySelector('p').innerHTML = 0
+				e.preventDefault()
+			}
+
+			document.addEventListener('DOMContentLoaded', function(event) {
+				webmo = new Webmo.ws(location.hostname)
+				document.getElementById('rotateSpeedSlider').addEventListener('input', rotateSlider, false)
+				document.getElementById("stopRotate").addEventListener('click', stop, false)
+			})
+		</script>
+	</head>
+
+	<body>
+		<div style="width:300px">
+			<form class="clearfix mxn1">
+				<label for="rotateSpeedSlider" class="left m1">rotateSpeedSlider</label>
+				<input id="rotateSpeedSlider" type="range" min="-1080" max="1080" value="0" class="left m2">
+				<p class="center align-middle m1">0</p>
+				<input type="button" id="stopRotate" value="STOP" class="waves-effect waves-light btn left col m6 offset-m3 red">
+			</form>
+		</div>
+
+		<script src="http://webmo.local/javascripts/webmo.js"></script>
+	</body>
+
+</html>
